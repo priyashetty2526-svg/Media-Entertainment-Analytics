@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Analytics Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>🎬 MediaPulse</h2>
+    <p>Movie Analytics</p>
+    <nav>
+        <a href="#overview">Overview</a>
+        <a href="#genres">Genre Analysis</a>
+        <a href="#movies">Top Movies</a>
+        <a href="#trends">Movie Trends</a>
+        <a href="#users">User Activity</a>
+    </nav>
+</div>
+
+<main class="content">
+
+    <header>
+        <h1>Media & Entertainment Analytics</h1>
+        <p>MovieLens Dataset | Powered by Scala and Apache Spark</p>
+    </header>
+
+    <section id="overview" class="dashboard-section">
+        <h2>Dashboard Overview</h2>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Movies</h3>
+                <p>9,742</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Ratings</h3>
+                <p>100,836</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <p>610</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Genres</h3>
+                <p id="genreCount">Loading...</p>
+            </div>
+        </div>
+
+        <div class="panel" style="margin-top:25px;">
+
+            <h2>📊 Key Insights</h2>
+            <button id="downloadReport"
+                    style="padding:12px 20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin-bottom:20px;">
+                📥 Download Analytics Report
+            </button>
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <h3>🏆 Most Popular Genre</h3>
+                    <p id="insightGenre">Loading...</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>⭐ Highest Rated Movie</h3>
+                    <p id="insightMovie">Loading...</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>📅 Most Productive Year</h3>
+                    <p id="insightYear">Loading...</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>👤 Most Active User</h3>
+                    <p id="insightUser">Loading...</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="genres" class="dashboard-section panel">
+        <h2>Genre Analysis</h2>
+
+        <div style="margin:15px 0;">
+            <select id="genreFilter"
+                    style="padding:12px; border:1px solid #ccc; border-radius:8px; width:220px;">
+                <option value="all">All Genres</option>
+            </select>
+        </div>
+
+        <canvas id="genreChart"></canvas>
+    </section>
+
+    <section id="movies" class="dashboard-section panel">
+
+        <h2>Top 10 Movies</h2>
+
+        <!-- Movie search and sorting controls -->
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin:20px 0;">
+
+            <input
+                    type="text"
+                    id="movieSearch"
+                    placeholder="🔍 Search movie by title..."
+                    style="flex:1; min-width:200px; padding:12px; border:1px solid #ccc; border-radius:8px; font-size:14px;"
+            >
+
+            <select
+                    id="movieSort"
+                    style="padding:12px; border:1px solid #ccc; border-radius:8px; font-size:14px;"
+            >
+                <option value="default">Default Order</option>
+                <option value="rating">Highest Average Rating</option>
+                <option value="count">Most Ratings</option>
+                <option value="title">Movie Name (A-Z)</option>
+            </select>
+
+            <button
+                    id="resetMovieFilters"
+                    style="padding:12px 18px; border:none; border-radius:8px; background:#3b82f6; color:white; cursor:pointer; font-size:14px;"
+            >
+                Reset
+            </button>
+
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Movie</th>
+                    <th>Ratings</th>
+                    <th>Average Rating</th>
+                </tr>
+                </thead>
+
+                <tbody id="movieTable"></tbody>
+            </table>
+        </div>
+
+        <p id="movieResultCount" style="margin-top:12px; color:#64748b;"></p>
+
+    </section>
+
+    <section id="trends" class="dashboard-section panel">
+        <h2>Yearly Movie Release Trends</h2>
+
+        <div style="margin:15px 0;">
+            <select id="yearFilter"
+                    style="padding:12px; border:1px solid #ccc; border-radius:8px; width:220px;">
+                <option value="all">All Years</option>
+                <option value="2000">From 2000</option>
+                <option value="2010">From 2010</option>
+                <option value="2020">From 2020</option>
+            </select>
+        </div>
+
+        <canvas id="yearChart"></canvas>
+
+        <h2>Rating Trends</h2>
+        <canvas id="ratingChart"></canvas>
+    </section>
+
+    <section id="users" class="dashboard-section panel">
+        <h2>Top Active Users</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Total Ratings</th>
+                    <th>Average Rating</th>
+                </tr>
+                </thead>
+
+                <tbody id="userTable"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        Developed using Scala, Apache Spark, HTML, CSS and JavaScript
+    </footer>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>

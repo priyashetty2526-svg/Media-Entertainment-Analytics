@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #111827;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px 20px;
+    z-index: 1000;
+}
+
+.sidebar h2 {
+    color: #38bdf8;
+    margin-bottom: 8px;
+}
+
+.sidebar p {
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+/* Navigation */
+
+.sidebar nav a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* Hover */
+
+.sidebar nav a:hover {
+    background: #1e40af;
+    color: white;
+}
+
+/* Active Page */
+
+.sidebar nav a.active {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.content {
+    margin-left: 240px;
+    padding: 35px;
+    min-height: 100vh;
+}
+
+/* Header */
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #64748b;
+}
+
+/* =========================
+   PAGE SECTIONS
+========================= */
+
+section {
+    margin-bottom: 30px;
+}
+
+/* Sections are controlled by JavaScript */
+
+.dashboard-section {
+    display: none;
+}
+
+/* Currently selected section */
+
+.dashboard-section.active-section {
+    display: block;
+}
+
+/* Section heading */
+
+section h2 {
+    margin-bottom: 20px;
+}
+
+/* =========================
+   STATISTICS CARDS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h3 {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.stat-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+/* =========================
+   DASHBOARD PANELS
+========================= */
+
+.panel {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   CHARTS
+========================= */
+
+canvas {
+    max-height: 350px;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+/* =========================
+   INPUTS / SELECTS / BUTTONS
+========================= */
+
+input,
+select,
+button {
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    color: #64748b;
+    padding: 25px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 900px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+    }
+
+    .sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sidebar nav a {
+        margin-bottom: 0;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+}
